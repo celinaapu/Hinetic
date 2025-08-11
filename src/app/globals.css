@@ -1,26 +1,31 @@
 @import "tailwindcss";
 
+/* === Custom Color Variables === */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #0a0a23;
+  --color-secondary: #e0ff66;
+  --color-text: #7c7c7c;
+  --color-accent: #9e8cf0;
+  --color-yellow: #ffd166;
+  --color-purple: #c2b4f2;
+  --color-dark-blue-1: #0a0a23;
+  --color-dark-blue-2: #141328;
+  --color-border-1: #eaeaea;
+  --color-gray-1: #d3d3d3;
+  --color-light-gray: #f0f0f0;
+  --color-main-bg: #d1c4f6;
+  --color-variant-bg: #f5f3ff;
+  --color-white: #ffffff;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply antialiased;
+    background-color: var(--color-main-bg);
+    color: var(--color-text);
+  }
 }
