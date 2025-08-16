@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* === Custom Color Variables === */
 :root {
   --color-primary: #0a0a23;
   --color-secondary: #e0ff66;
@@ -22,10 +21,10 @@
   html {
     scroll-behavior: smooth;
   }
-
+a
   body {
     @apply antialiased;
-    background-color: var(--color-main-bg);
+    /* background-color: var(--color-main-bg); */
     color: var(--color-text);
   }
 }

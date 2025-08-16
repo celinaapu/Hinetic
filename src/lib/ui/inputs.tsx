@@ -35,7 +35,7 @@ const Input = <T extends FieldValues>({
   inputMode,
 }: InputProps<T>) => (
   <div>
-    {label && <label className="text-white block mb-1">{label}</label>}
+    {label && <label className="text-black block mb-1">{label}</label>}
     <div className="relative">
       <Controller
         name={name}
@@ -45,7 +45,7 @@ const Input = <T extends FieldValues>({
             {...field}
             type={type}
             placeholder={placeholder || label}
-            className={`w-full outline-none p-2 rounded bg-[#1E2A47] text-white border border-gray-500 ${
+            className={`w-full outline-none p-2 rounded text-black border border-gray-500 ${
               appendIcon ? "pr-10" : ""
             } ${className}`}
             inputMode={inputMode}

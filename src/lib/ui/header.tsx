@@ -10,7 +10,7 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = ({ navigationItems }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   return (
-    <nav className="bg-[#0a0a23] shadow-lg relative z-50">
+    <nav className="bg-[#0a0a23] w-[100%] shadow-lg relative z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -19,7 +19,6 @@ const Navigation: React.FC<NavigationProps> = ({ navigationItems }) => {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navigationItems.map((item, index) => (
               <a
@@ -32,14 +31,12 @@ const Navigation: React.FC<NavigationProps> = ({ navigationItems }) => {
             ))}
           </div>
 
-          {/* Get Started Button */}
           <div className="hidden md:block">
             <button className="bg-[#9e8cf0] hover:bg-[#c2b4f2] text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105 shadow-lg">
               GET STARTED
             </button>
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -62,7 +59,6 @@ const Navigation: React.FC<NavigationProps> = ({ navigationItems }) => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-16 left-0 right-0 bg-[#0a0a23] border-t border-[#141328] shadow-lg">
             <div className="px-2 pt-2 pb-3 space-y-1">

@@ -10,8 +10,6 @@ const HomePage: React.FC = () => {
       <HeroSection />
       <MiddleSections />
       <ThirdSection />
-      {/* <WhyChooseUs/>
-      <ServicesSection/>*/}
       <Footer />
     </div>
   );

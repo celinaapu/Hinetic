@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@/lib/ui/inputs";
 import Button from "@/lib/shared/Button";
 import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -31,20 +32,35 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
-      <div className="bg-[#0B1D40] text-white flex flex-col justify-center items-center px-8">
-        <h1 className="text-4xl font-bold mb-4 text-center">
-          Find your next job
-        </h1>
-        <p className="text-lg text-center max-w-sm">
-          Sign in to access thousands of remote and local job opportunities
-          tailored just for you.
-        </p>
+    <div className="min-h-screen flex flex-col lg:flex-row">
+      <div className="relative lg:w-1/2 w-full flex flex-col justify-center px-6 py-16 text-white bg-[url('https://res.cloudinary.com/celina/image/upload/v1754908306/03-Sky_2_sn4cdn.jpg')] bg-cover bg-center">
+        <div className="absolute inset-0 bg-black/50"></div>
+
+        <div className="relative z-10 max-w-2xl space-y-6">
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+            Connecting Talent
+            <span className="block text-2xl md:text-4xl font-light mt-2">
+              to Opportunities
+            </span>
+          </h1>
+
+          <p className="text-base md:text-lg leading-relaxed">
+            Discover endless opportunities on{" "}
+            <span className="font-semibold">Hinetic</span>, where talented
+            freelancers, artisans, and businesses unite. Jump right in with us!
+          </p>
+
+          <div className="mt-6">
+            <p className="text-sm md:text-base italic opacity-90">
+              Upload samples of your work to impress potential clients
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div className="bg-[#f1f5f9] flex items-center justify-center">
+      <div className="bg-white lg:w-1/2 w-full flex items-center justify-center px-6 py-12">
         <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
-          <h2 className="text-2xl font-bold text-center text-[#0B1D40] mb-6">
+          <h2 className="text-2xl font-bold text-center text-[var(--color-primary)] mb-6">
             Welcome Back 👋
           </h2>
 
@@ -55,6 +71,7 @@ const LoginPage = () => {
               label="Email"
               error={errors.email?.message}
               type="email"
+              className="focus:border-[var(--color-accent)] focus:ring-[var(--color-accent)]"
             />
 
             <Input
@@ -66,31 +83,38 @@ const LoginPage = () => {
               appendIcon={
                 <span
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="cursor-pointer text-gray-500"
+                  className="cursor-pointer"
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </span>
               }
+              className="focus:border-[var(--color-accent)] focus:ring-[var(--color-accent)]"
             />
 
             <div className="text-right">
-              <a href="#" className="text-sm text-blue-600 hover:underline">
+              <a
+                href="#"
+                className="text-sm text-[var(--color-accent)] hover:underline"
+              >
                 Forgot password?
               </a>
             </div>
 
             <Button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white"
+              className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-dark-blue-2)] transition-colors duration-200 text-[var(--color-white)]"
             >
               Sign In
             </Button>
 
-            <p className="text-sm text-center text-gray-600 mt-4">
-              Don't have an account?{" "}
-              <a href="#" className="text-blue-600 hover:underline">
+            <p className="text-sm text-center text-[var(--color-text)] mt-4">
+              Don't have an account?
+              <Link
+                href="/auth/register"
+                className="text-[var(--color-accent)] pl-2 hover:underline"
+              >
                 Create one
-              </a>
+              </Link>
             </p>
           </form>
         </div>
