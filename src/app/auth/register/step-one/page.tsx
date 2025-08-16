@@ -11,23 +11,9 @@ import Select from "@/lib/ui/select";
 import Button from "@/lib/shared/Button";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedin, FaSquareInstagram } from "react-icons/fa6";
+import { stepOneSchema } from "@/Schemas";
 
 const countries = ["", "Nigeria", "Ghana", "Kenya", "South Africa"];
-
-const stepOneSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  sex: z.enum(["male", "female"], {
-    message: "Please select your sex.",
-  }),
-  country: z.string().optional(),
-  city: z.string().min(1, "City is required"),
-  phone: z
-    .string()
-    .regex(/^\d+$/, "Phone number must be numeric (e.g., 08012345678)")
-    .min(7, "Phone number is too short")
-    .max(15, "Phone number is too long"),
-});
 
 type StepOneFormData = z.infer<typeof stepOneSchema>;
 

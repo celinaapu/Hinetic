@@ -5,13 +5,8 @@ import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
+import { verificationSchema } from "@/Schemas";
 
-const verificationSchema = z.object({
-  code: z
-    .string()
-    .length(6, { message: "Verification code must be 6 digits" })
-    .regex(/^\d+$/, { message: "Code must contain only numbers" }),
-});
 
 type VerificationFormData = z.infer<typeof verificationSchema>;
 

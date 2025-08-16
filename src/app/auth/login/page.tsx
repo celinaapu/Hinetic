@@ -8,11 +8,8 @@ import Input from "@/lib/ui/inputs";
 import Button from "@/lib/shared/Button";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { loginSchema } from "@/Schemas";
 
-const loginSchema = z.object({
-  email: z.string().email("Invalid email"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-});
 
 type LoginFormData = z.infer<typeof loginSchema>;
 

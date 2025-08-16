@@ -1,5 +1,9 @@
 import { z } from "zod";
 
+export const loginSchema = z.object({
+  email: z.string().email("Invalid email"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
 export const roleSchema = z.object({
   role: z.enum(
     ["client", "artisan", "explorer", "skilled-professional", "marketplace"],
@@ -21,8 +25,7 @@ export const stepOneSchema = z.object({
     .min(7, "Phone number is too short")
     .max(15, "Phone number is too long"),
 });
-
-export const stepTwoSchema = z
+ export const stepTwoSchema = z
   .object({
     email: z.string().email("Invalid email address"),
     password: z.string().min(8, "Password must be at least 8 characters"),
@@ -36,28 +39,11 @@ export const stepTwoSchema = z
     path: ["confirm"],
   });
 
-export const verificationSchema = z.object({
+
+ export const verificationSchema = z.object({
   code: z
     .string()
-    .length(6, "Verification code must be 6 digits")
-    .regex(/^\d{6}$/, "Code must be numeric"),
+    .length(6, { message: "Verification code must be 6 digits" })
+    .regex(/^\d+$/, { message: "Code must contain only numbers" }),
 });
 
-export type RoleFormData = z.infer<typeof roleSchema>;
-export type StepOneFormData = z.infer<typeof stepOneSchema>;
-export type StepTwoFormData = z.infer<typeof stepTwoSchema>;
-export type VerificationFormData = z.infer<typeof verificationSchema>;
-
-export type RegistrationStep =
-  | "role"
-  | "stepOne"
-  | "stepTwo"
-  | "verification"
-  | "success";
-
-export interface RegistrationData {
-  role?: string;
-  stepOne?: StepOneFormData;
-  stepTwo?: StepTwoFormData;
-  verification?: VerificationFormData;
-}
