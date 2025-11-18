@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import { ArrowRight, Building2, Users, TrendingUp, Star } from "lucide-react";
 import { JobCard } from "@/lib/shared/jobCard";
+import { ArrowRight, Building2, Star, TrendingUp, Users } from "lucide-react";
+import React from "react";
 
 const MiddleSections: React.FC = () => {
   return (
@@ -51,10 +51,20 @@ const MiddleSections: React.FC = () => {
             </div>
           </div>
 
-          <div className="w-full h-[600px] bg-[var(--color-main-bg)] rounded-3xl shadow-md flex items-center justify-center">
-            <span className="text-[var(--color-primary)] font-bold">
-              [Hero Illustration]
-            </span>
+          <div className="w-full h-full bg-[var(--color-main-bg)] rounded-3xl shadow-md flex items-center justify-center">
+            <video
+              className="w-full h-auto rounded-md"
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              <source
+                src="https://res.cloudinary.com/celina/video/upload/v1755429195/1475515_People_Business_3840x2160_b4pnd7.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </section>

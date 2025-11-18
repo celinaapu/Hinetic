@@ -4,8 +4,8 @@ import { LucideIcon } from "lucide-react";
 export interface NavigationItem {
   label: string;
   href: string;
+  title?: string; // Kept this title property
 }
-
 export interface JobCardProps {
   icon: LucideIcon; 
   iconBgColor: string; // Tailwind background color class

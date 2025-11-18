@@ -1,9 +1,12 @@
+// src/app/layout.tsx
+
+import Navigation from "@/lib/ui/navigation";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/lib/ui/header";
 
-const inter = Inter({ subsets: ["latin"] });
+// MODIFICATION: Added 'display: "swap"' to the configuration object.
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "Hinetic- Find Your Perfect Job",

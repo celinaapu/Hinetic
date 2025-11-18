@@ -1,5 +1,5 @@
+import { Star, Users } from "lucide-react";
 import React from "react";
-import { Play, Users, Search, FileText, Star } from "lucide-react";
 import ServiceSection from "./serviceSection";
 import WhyChooseUs from "./whyChooseUs";
 
@@ -54,7 +54,7 @@ const ThirdSection: React.FC = () => {
 
                     <div className=" items-start">
                       <div className=" items-center flex gap-4 hover:text-[var(--color-secondary)]">
-                        <div className="text-2xl hover:text-[var(--color-secondary)]   text-white  w-8 h-8 flex items-center justify-center font-bold">
+                        <div className="text-2xl hover:text-[var(--color-secondary)]  text-white  w-8 h-8 flex items-center justify-center font-bold">
                           03
                         </div>
                         <h3 className="font-semiboldhover:text-[var(--color-secondary)]  mb-1">
@@ -72,12 +72,21 @@ const ThirdSection: React.FC = () => {
               </div>
 
               <div className="flex justify-center">
-                <div className="bg-[var(--color-accent)] rounded-3xl w-80 h-96 flex items-center justify-center shadow-2xl">
+                <div className="bg-[var(--color-accent)] rounded-3xl flex items-center justify-center shadow-2xl">
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Play className="w-8 h-8 text-white" fill="white" />
-                    </div>
-                    <p className="text-white/80 text-sm">Watch Introduction</p>
+                    <video
+                      className="w-full h-auto rounded-md"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                    >
+                      <source
+                        src="https://res.cloudinary.com/celina/video/upload/v1763136273/0_Wind_Energy_Renewable_Energy_3840x2160_ifgq2f.mp4"
+                        type="video/mp4"
+                      />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
                 </div>
               </div>
@@ -87,70 +96,9 @@ const ThirdSection: React.FC = () => {
         <section className="px-4 py-16 bg-white">
           <div className="max-w-7xl mx-auto text-center">
             <ServiceSection />
-            {/* <h2 className="text-3xl lg:text-4xl font-bold text-[var(--color-primary)] mb-4">
-              Hinetic Service Offerings
-            </h2>
-            <p className="text-[var(--color-text)] mb-12 max-w-2xl mx-auto">
-              Discover comprehensive solutions designed to accelerate your
-              career growth
-            </p>
-
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow">
-                <div className="w-16 h-16 bg-[var(--color-accent)] rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-[var(--color-primary)] mb-3">
-                  Job Placement
-                </h3>
-                <p className="text-[var(--color-text)] text-sm leading-relaxed">
-                  Connect with top employers and find your perfect career match
-                  through our extensive network
-                </p>
-              </div>
-
-              <div className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow">
-                <div className="w-16 h-16 bg-[var(--color-accent)] rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Search className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-[var(--color-primary)] mb-3">
-                  Career Guidance
-                </h3>
-                <p className="text-[var(--color-text)] text-sm leading-relaxed">
-                  Get personalized advice and strategies to navigate your
-                  professional journey successfully
-                </p>
-              </div>
-
-              <div className="bg-gray-50 rounded-2xl p-8 hover:shadow-lg transition-shadow">
-                <div className="w-16 h-16 bg-[var(--color-accent)] rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <FileText className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-[var(--color-primary)] mb-3">
-                  Resume Building
-                </h3>
-                <p className="text-[var(--color-text)] text-sm leading-relaxed">
-                  Create compelling resumes that showcase your skills and
-                  experience effectively
-                </p>
-              </div>
-            </div>
-
-            <button className="bg-[var(--color-accent)] text-white px-8 py-3 rounded-full font-medium hover:bg-[var(--color-purple)] transition-colors">
-              Get Started
-            </button> */}
           </div>
         </section>
-        <section className="px-4 py-4 bg-[var(--color-accent)]">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-16">
-              <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto hover:bg-white/30 transition-colors cursor-pointer">
-                <Play className="w-10 h-10 text-white ml-1" fill="white" />
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="px-4 py-16 bg-white">
+        <section className="px-4 py-8 bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="flex justify-between items-start mb-12">
               <div>
@@ -158,7 +106,7 @@ const ThirdSection: React.FC = () => {
                   Testimonials
                 </h2>
                 <p className="text-[var(--color-text)]">
-                  Here's what our satisfied users have to say about their
+                  Here&apos;s what our satisfied users have to say about their
                   experience with Hinetic
                 </p>
               </div>
@@ -176,8 +124,8 @@ const ThirdSection: React.FC = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm opacity-90 mb-2">
-                      "Hinetic transformed my career journey completely. The
-                      personalized guidance was exactly what I needed."
+                      &quot;Hinetic transformed my career journey completely.
+                      The personalized guidance was exactly what I needed.&quot;
                     </p>
                     <p className="text-xs opacity-70">
                       Sarah Johnson, Marketing Manager
@@ -197,7 +145,7 @@ const ThirdSection: React.FC = () => {
                     </div>
                   </div>
                   <p className="text-xs text-[var(--color-text)] mb-2">
-                    "Amazing platform for job seekers"
+                    &quot;Amazing platform for job seekers&quot;
                   </p>
                   <p className="text-xs text-[var(--color-text)]/70">
                     Mike Chen
@@ -214,7 +162,7 @@ const ThirdSection: React.FC = () => {
                     </div>
                   </div>
                   <p className="text-xs text-[var(--color-text)] mb-2">
-                    "Found my dream job in 2 weeks"
+                    &quot;Found my dream job in 2 weeks&quot;
                   </p>
                   <p className="text-xs text-[var(--color-text)]/70">
                     Emma Davis
@@ -231,7 +179,7 @@ const ThirdSection: React.FC = () => {
                     </div>
                   </div>
                   <p className="text-xs text-[var(--color-text)] mb-2">
-                    "Excellent career guidance"
+                    &quot;Excellent career guidance&quot;
                   </p>
                   <p className="text-xs text-[var(--color-text)]/70">
                     Alex Rivera
@@ -248,7 +196,7 @@ const ThirdSection: React.FC = () => {
                     </div>
                   </div>
                   <p className="text-xs text-[var(--color-text)] mb-2">
-                    "Professional and reliable service"
+                    &quot;Professional and reliable service&quot;
                   </p>
                   <p className="text-xs text-[var(--color-text)]/70">
                     Lisa Park

@@ -21,10 +21,75 @@
   html {
     scroll-behavior: smooth;
   }
-a
-  body {
+  a body {
     @apply antialiased;
     /* background-color: var(--color-main-bg); */
     color: var(--color-text);
+  }
+
+  .PhoneInputInput:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    --tw-ring-color: transparent !important;
+  }
+
+  .radio-black:checked {
+    /* Set background color to black (The fill color of the radio) */
+    background-color: black !important;
+    /* Set border color to black (The border color when checked) */
+    border-color: black !important;
+    /* Ensure the checkmark itself is white for contrast */
+    color: white !important;
+    box-shadow: none !important;
+  }
+
+  /* This is for the focus outline (the orange ring in the image) */
+  .radio-black:focus {
+    /* Set the focus ring color to black */
+    --tw-ring-color: black !important;
+    /* Adjust box shadow to show a subtle black ring */
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25) !important;
+  }
+}
+
+@layer utilities {
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 1.2s ease-out forwards;
+  }
+
+  @keyframes slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-slide-up {
+    animation: slide-up 1s ease-out forwards;
+  }
+
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-up {
+    animation: fade-up 0.9s ease-out forwards;
   }
 }

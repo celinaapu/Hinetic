@@ -2,7 +2,6 @@ import Footer from "@/components/HomeComponents/footer";
 import HeroSection from "@/components/HomeComponents/HeroSection";
 import MiddleSections from "@/components/HomeComponents/MiddleSection";
 import ThirdSection from "@/components/HomeComponents/thirdSection";
-import WhyChooseUs from "@/components/HomeComponents/whyChooseUs";
 
 const HomePage: React.FC = () => {
   return (

@@ -1,35 +1,30 @@
-// app/client/jobs/new/page.tsx
 "use client";
 
-import React from "react";
+import { JobFormData } from "@/lib/types";
+import Navigation from "@/lib/ui/navigation";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-// import { Header } from "@/components/ui/Header";
-import { JobFormData } from "@/lib/types";
-import { Header } from "@/lib/ui/header";
 
 const PostJobPage = () => {
   const router = useRouter();
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<JobFormData>();
 
   const onSubmit = (data: JobFormData) => {
     console.log("Job posted:", data);
-    // Here you would typically send the data to your API
-    // For demo purposes, we'll just redirect back to dashboard
     router.push("/client/dashboard");
   };
 
   return (
     <div className="flex-1 overflow-auto">
-      <Header
+      <Navigation
         title="Post New Job"
         subtitle="Create a new job posting to attract top talent"
         showSearch={false}
+        navigationItems={[]}
       />
 
       <main className="p-6">

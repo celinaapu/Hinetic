@@ -1,21 +1,25 @@
 "use client";
 
-import React from "react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import Image from "next/image";
-import { CheckCircle, ArrowRight } from "lucide-react";
 
 const WhyChooseUs = () => {
   return (
     <section className="w-full px-6 md:px-20 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 bg-[var(--color-main-bg)]">
       <div className="w-full h-[300px] md:h-[450px] bg-[var(--color-main-bg)] rounded-3xl shadow-md flex items-center justify-center">
-        <span className="text-[var(--color-primary)] font-bold">
-          [Hero Illustration]
-        </span>
+        <Image
+          src="https://res.cloudinary.com/celina/image/upload/v1763138545/front-view-wooden-ladder-with-carrer_lxadwm.jpg"
+          alt="description"
+          width={800}
+          height={600}
+          unoptimized={true}
+          className="rounded-3xl"
+        />
       </div>
 
       <div className="flex flex-col justify-center gap-6">
         <h2 className="text-3xl md:text-4xl font-bold text-[var(--color-dark-blue-1)]">
-          Why Choose TokoJobs?
+          Why Choose Hinetic?
         </h2>
 
         <ul className="flex flex-col gap-4">

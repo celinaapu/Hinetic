@@ -42,7 +42,7 @@ const LoginPage = () => {
           </h1>
 
           <p className="text-base md:text-lg leading-relaxed">
-            Discover endless opportunities on{" "}
+            Discover endless opportunities on
             <span className="font-semibold">Hinetic</span>, where talented
             freelancers, artisans, and businesses unite. Jump right in with us!
           </p>
@@ -105,7 +105,7 @@ const LoginPage = () => {
             </Button>
 
             <p className="text-sm text-center text-[var(--color-text)] mt-4">
-              Don't have an account?
+              Don&apos;t have an account?
               <Link
                 href="/auth/register"
                 className="text-[var(--color-accent)] pl-2 hover:underline"

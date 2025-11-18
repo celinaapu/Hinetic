@@ -14,18 +14,16 @@ export const roleSchema = z.object({
 export const stepOneSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
-  sex: z.enum(["male", "female"], {
-    message: "Please select your sex.",
-  }),
+  gender: z.string().min(1, "Gender selection is required"),
   country: z.string().optional(),
   city: z.string().min(1, "City is required"),
   phone: z
     .string()
-    .regex(/^\d+$/, "Phone number must be numeric (e.g., 08012345678)")
+    .regex(/^\+?\d+$/, "Phone number must be numeric (e.g., +2348012345678)")
     .min(7, "Phone number is too short")
     .max(15, "Phone number is too long"),
 });
- export const stepTwoSchema = z
+export const stepTwoSchema = z
   .object({
     email: z.string().email("Invalid email address"),
     password: z.string().min(8, "Password must be at least 8 characters"),
@@ -39,11 +37,9 @@ export const stepOneSchema = z.object({
     path: ["confirm"],
   });
 
-
- export const verificationSchema = z.object({
+export const verificationSchema = z.object({
   code: z
     .string()
     .length(6, { message: "Verification code must be 6 digits" })
     .regex(/^\d+$/, { message: "Code must contain only numbers" }),
 });
-

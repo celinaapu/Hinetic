@@ -3,24 +3,17 @@
 import React from "react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
 
-interface InputProps<T extends FieldValues> {
+interface InputProps<T extends FieldValues>
+  extends Omit<
+    React.ComponentPropsWithoutRef<"input">,
+    "name" | "value" | "onChange" | "onBlur"
+  > {
   name: Path<T>;
   control: Control<T>;
   label?: string;
   error?: string;
-  className?: string;
-  type?: string;
-  placeholder?: string;
+  className?: string; 
   appendIcon?: React.ReactElement;
-  inputMode?:
-    | "none"
-    | "text"
-    | "decimal"
-    | "numeric"
-    | "tel"
-    | "search"
-    | "email"
-    | "url";
 }
 
 const Input = <T extends FieldValues>({
@@ -33,6 +26,7 @@ const Input = <T extends FieldValues>({
   placeholder,
   appendIcon,
   inputMode,
+  ...restProps 
 }: InputProps<T>) => (
   <div>
     {label && <label className="text-black block mb-1">{label}</label>}
@@ -43,6 +37,7 @@ const Input = <T extends FieldValues>({
         render={({ field }) => (
           <input
             {...field}
+            {...restProps} 
             type={type}
             placeholder={placeholder || label}
             className={`w-full outline-none p-2 rounded text-black border border-gray-500 ${

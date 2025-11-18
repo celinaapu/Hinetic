@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
             <p className="text-gray-300 text-sm leading-relaxed max-w-md">
               Welcome to Hinetic, the AI-powered job platform that connects
               talented professionals with incredible opportunities. Whether
-              you're a skilled tradesperson, a creative professional, or a
+              you&apos;re a skilled tradesperson, a creative professional, or a
               company seeking top talent, we make finding the perfect fit easier
               than ever.
             </p>
@@ -68,8 +68,8 @@ const Footer: React.FC = () => {
             <div className="mt-8 pt-8 border-t border-gray-800">
               <h3 className="text-white font-semibold mb-4">Contact</h3>
               <div className="space-y-2 text-sm text-gray-300">
-                <p>+1 (555) 000-0000</p>
-                <p>support@hinetic.com</p>
+                <p>+234 7080084120</p>
+                <p>justinacassy@gmail.com</p>
               </div>
             </div>
           </div>

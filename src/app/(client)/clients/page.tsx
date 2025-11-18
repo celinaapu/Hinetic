@@ -1,14 +1,13 @@
 // app/client/dashboard/page.tsx
 "use client";
 
-import React, { useState } from "react";
-import { Briefcase, Users, Eye, TrendingUp, Plus } from "lucide-react";
-import { sampleJobs, clientStats } from "@/lib/data";
-import { JobFormData } from "@/lib/types";
-import { Header } from "@/lib/ui/header";
 import { JobCard } from "@/components/Client/JobCard";
 import { JobPostForm } from "@/components/Client/postJobForm";
+import { clientStats, sampleJobs } from "@/lib/data";
+import { JobFormData } from "@/lib/types";
 import { StatsCard } from "@/lib/ui/statsCard";
+import { Briefcase, Eye, Plus, TrendingUp, Users } from "lucide-react";
+import { useState } from "react";
 
 const ClientDashboard = () => {
   const [showJobForm, setShowJobForm] = useState(false);
@@ -61,11 +60,6 @@ const ClientDashboard = () => {
 
   return (
     <div className="flex-1 overflow-auto">
-      <Header
-        title="Client Dashboard"
-        subtitle="Manage your job postings and applications"
-      />
-
       <main className="p-6">
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

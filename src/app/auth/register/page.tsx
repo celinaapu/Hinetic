@@ -3,7 +3,7 @@
 import RoleSelectionModal from "@/components/Modals/RoleSelectionModal";
 import { useSignupStore } from "@/stores/signupStore";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import StepOnePage from "./step-one/page";
 import StepTwo from "./step-two/page";
 import Verification from "./verify-link/page";
@@ -17,13 +17,13 @@ export default function SignUpPage() {
     if (step === 5 && role) {
       switch (role) {
         case "client":
-          router.push("/dashboard/client");
+          router.push("/clients");
           break;
         case "artisan":
           router.push("/dashboard/artisan");
           break;
         case "explorer":
-          router.push("/dashboard/explorer");
+          router.push("applicants");
           break;
         case "skilled-professional":
           router.push("/dashboard/professional");
@@ -43,7 +43,7 @@ export default function SignUpPage() {
       )}
       {step === 3 && (
         <Verification
-          onNext={() => setStep(4)} 
+          onNext={() => setStep(4)}
           onBack={() => setStep(2)}
           onComplete={() => console.log("Verification completed")}
         />
@@ -53,7 +53,7 @@ export default function SignUpPage() {
           isOpen={true}
           onNext={({ role }) => {
             setRole(role);
-            setStep(5); 
+            setStep(5);
           }}
           onClose={() => router.push("/")}
         />

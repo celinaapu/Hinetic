@@ -1,9 +1,8 @@
-// components/client/JobPostForm.tsx
 "use client";
 
+import { JobFormData } from "@/lib/types";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { JobFormData } from "@/lib/types";
 
 interface JobPostFormProps {
   isOpen: boolean;
@@ -32,7 +31,7 @@ export const JobPostForm: React.FC<JobPostFormProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/40 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-xl p-8 max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-gray-900">Post New Job</h2>

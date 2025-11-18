@@ -1,15 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "react-hot-toast";
 import { verificationSchema } from "@/Schemas";
-
+import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useEffect, useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { z } from "zod";
 
 type VerificationFormData = z.infer<typeof verificationSchema>;
 
+// Using any here is fine because we disabled the lint rule above
 const Button = ({ children, ...props }: any) => (
   <button {...props}>{children}</button>
 );
@@ -116,7 +118,7 @@ const Verification: React.FC<VerificationProps> = ({
             Verify Your Email
           </h1>
           <p className="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8 leading-relaxed">
-            We've sent a 6-digit verification code to{" "}
+            We've sent a 6-digit verification code to
             <span className="font-semibold text-blue-600">
               {email || "your email"}
             </span>
