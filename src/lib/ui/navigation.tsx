@@ -2,7 +2,7 @@
 
 import { useUserStore } from "@/stores/userStore";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { User2Icon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { HineticLogo } from "./Logo";
@@ -54,7 +54,7 @@ const Navigation: React.FC<NavigationProps> = ({
     <nav className="bg-[#0a0a23] w-full shadow-lg relative z-[60]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Left: Logo + Title */}
+          {/* Logo + Titles */}
           <div className="flex items-center space-x-4">
             <div className="w-10 h-10 flex-shrink-0">
               <HineticLogo />
@@ -69,7 +69,7 @@ const Navigation: React.FC<NavigationProps> = ({
             )}
           </div>
 
-          {/* Middle: Navigation Items */}
+          {/* Desktop Navigation Items */}
           <div className="hidden md:flex items-center space-x-8">
             {navigationItems.map((item, index) => (
               <button
@@ -82,7 +82,7 @@ const Navigation: React.FC<NavigationProps> = ({
             ))}
           </div>
 
-          {/* Right: GET STARTED / Profile / Animated Emoji */}
+          {/* Right Side: Avatar / Get Started / Emoji */}
           <div className="hidden md:flex items-center gap-4">
             {isAuthPage ? (
               <div className="flex items-center gap-2">
@@ -101,22 +101,19 @@ const Navigation: React.FC<NavigationProps> = ({
                   Setting up profile...
                 </span>
               </div>
-            ) : isAuthenticated && user ? (
+            ) : isAuthenticated ? (
               <div
                 onClick={handleProfile}
                 className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition"
               >
-                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-gray-500">
-                  <Image
-                    src={user.avatar || "https://i.pravatar.cc/100?img=5"}
-                    alt={user.name}
-                    fill
-                    className="object-cover"
-                  />
+                <div className="relative w-10 h-10 text-white rounded-full overflow-hidden border border-gray-500">
+                  <User2Icon />
                 </div>
-                <span className="text-white font-medium hidden md:inline">
-                  {user.name}
-                </span>
+                {user?.name && (
+                  <span className="text-white font-medium hidden md:inline">
+                    {user.name}
+                  </span>
+                )}
               </div>
             ) : isHomePage ? (
               <button
@@ -128,7 +125,7 @@ const Navigation: React.FC<NavigationProps> = ({
             ) : null}
           </div>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
               onClick={toggleMobileMenu}
@@ -191,12 +188,12 @@ const Navigation: React.FC<NavigationProps> = ({
                     Setting up profile...
                   </span>
                 </div>
-              ) : isAuthenticated && user ? (
+              ) : isAuthenticated ? (
                 <button
                   onClick={handleProfile}
-                  className="w-full text-center bg-[#6b7280] hover:bg-[#4b5563] text-white px-3 py-2 rounded-lg font-medium transition-all duration-300 mt-2"
+                  className="w-full text-center bg-[#6b7280 hover:bg-[#4b5563] text-white px-3 py-2 rounded-lg font-medium transition-all duration-300 mt-2"
                 >
-                  Profile
+                  <User2Icon />
                 </button>
               ) : isHomePage ? (
                 <button

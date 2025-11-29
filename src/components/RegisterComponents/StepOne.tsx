@@ -1,3 +1,4 @@
+// src/components/auth/register/StepOneComponent.tsx
 "use client";
 
 import Button from "@/lib/shared/Button";
@@ -5,6 +6,7 @@ import Input from "@/lib/ui/inputs";
 import { stepOneSchema } from "@/Schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { City, ICity } from "country-state-city";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { ComponentPropsWithoutRef, useEffect, useMemo, useState } from "react";
 import CountryFlag from "react-country-flag";
@@ -20,28 +22,18 @@ type StepOneFormData = z.infer<typeof stepOneSchema>;
 type PhoneInputProps = ComponentPropsWithoutRef<typeof PhoneInput>;
 type CountryCode = NonNullable<PhoneInputProps["defaultCountry"]>;
 
-interface StepOneFormProps {
-  onNext: () => void;
-}
-
 interface SelectOption {
   value: string;
   label: string;
 }
 
-function isValidCountryCode(code: string): code is CountryCode {
-  return code.length === 2 && /^[A-Z]{2}$/.test(code);
+interface StepOneProps {
+  onNext: (data: StepOneFormData) => void;
 }
 
-const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
+const StepOneComponent: React.FC<StepOneProps> = ({ onNext }) => {
   const router = useRouter();
-  const [userRole, setUserRole] = useState<string | null>(null);
   const [cityOptions, setCityOptions] = useState<SelectOption[]>([]);
-
-  useEffect(() => {
-    const role = localStorage.getItem("userRole");
-    setUserRole(role);
-  }, []);
 
   const {
     handleSubmit,
@@ -52,7 +44,6 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
   } = useForm<StepOneFormData>({
     resolver: zodResolver(stepOneSchema),
     mode: "onSubmit",
-    reValidateMode: "onSubmit",
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -77,12 +68,11 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
     if (selectedCountryCode) {
       const cities: ICity[] | undefined =
         City.getCitiesOfCountry(selectedCountryCode);
+
       if (cities) {
-        const citySelectOptions: SelectOption[] = cities.map((city: ICity) => ({
-          value: city.name,
-          label: city.name,
-        }));
-        setCityOptions(citySelectOptions);
+        setCityOptions(
+          cities.map((city) => ({ value: city.name, label: city.name }))
+        );
       }
     }
   }, [selectedCountryCode, setValue]);
@@ -90,44 +80,77 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
   const onSubmit = (data: StepOneFormData) => {
     try {
       localStorage.setItem("signupStepOneData", JSON.stringify(data));
-      onNext();
+      onNext(data);
     } catch (error) {
-      console.error("Error during form submission or storage:", error);
+      console.error("Error storing data or navigating:", error);
     }
   };
 
+  const isValidCountryCode = (code: string): code is CountryCode =>
+    code.length === 2 && /^[A-Z]{2}$/.test(code);
+
   const defaultCountryCode: CountryCode | undefined =
     selectedCountryCode && isValidCountryCode(selectedCountryCode)
-      ? (selectedCountryCode as CountryCode)
+      ? selectedCountryCode
       : undefined;
 
   return (
-    <div className="w-full flex">
-      <div
+    <motion.div
+      className="w-full flex min-h-screen"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
+      <motion.div
         className="hidden md:flex relative w-[60%] flex-col justify-center items-center text-white bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage:
             "url('https://res.cloudinary.com/celina/image/upload/v1754848373/Image_2_xnf4nq.jpg')",
         }}
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7 }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative z-10 text-center max-w-md">
-          <h1 className="text-5xl font-bold leading-tight mb-14">
+        <div className="relative z-10 text-center max-w-md p-8">
+          <motion.h1
+            className="text-5xl font-bold leading-tight mb-14"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
             Join Us Today!
-          </h1>
-          <p className="text-lg mb-14">
+          </motion.h1>
+
+          <motion.p
+            className="text-lg mb-14"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
             Start your journey to finding the perfect job or the ideal
             candidate.
-          </p>
-          <p className="text-md opacity-90">
-            Sign up in just a few easy steps and unlock access to thousands of
-            remote and local job opportunities.
-          </p>
-        </div>
-      </div>
+          </motion.p>
 
-      <div className="bg-white w-full md:w-[43%] md:rounded-l-[60px] md:-ml-12 relative z-10 flex items-center justify-center py-8 overflow-visible">
-        <div className="w-full p-8">
+          <motion.p
+            className="text-md opacity-90"
+            initial={{ y: 35, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            Sign up in just a few easy steps and unlock access to thousands of
+            career opportunities.
+          </motion.p>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="bg-white w-full md:w-[43%] md:rounded-l-[60px] md:-ml-12 relative z-10 flex items-center justify-center py-12"
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7 }}
+      >
+        <div className="w-full p-8 max-w-lg">
           <div className="mb-6 text-center">
             <span className="text-sm text-[var(--color-text)]">
               Step 1 of 3
@@ -139,10 +162,15 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
           </h2>
 
           <p className="text-[var(--color-text)] text-md mb-8 text-center">
-            Just a few details to get started on Hinetic as a member.
+            Just a few details to get started on Hinetic.
           </p>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <motion.form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
             <div className="space-y-4">
               <Input
                 name="firstName"
@@ -151,6 +179,7 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
                 placeholder="Enter your first name"
                 error={errors.firstName?.message}
               />
+
               <Input
                 name="lastName"
                 control={control}
@@ -169,7 +198,7 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
                 name="gender"
                 control={control}
                 render={({ field }) => {
-                  const genderOptions = [
+                  const genderOptions: SelectOption[] = [
                     { value: "Agender", label: "Agender" },
                     { value: "Androgyne", label: "Androgyne" },
                     { value: "Androgynous", label: "Androgynous" },
@@ -183,16 +212,15 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
                     { value: "Trans Male", label: "Trans Male" },
                   ];
 
-                  const selectedOption = genderOptions.find(
-                    (o) => o.value === field.value
-                  ) || { value: field.value, label: field.value };
+                  const selectedOption =
+                    genderOptions.find((o) => o.value === field.value) || null;
 
                   return (
                     <CreatableSelect
                       isClearable
                       options={genderOptions}
                       value={selectedOption}
-                      onChange={(option: any) =>
+                      onChange={(option: SelectOption | null) =>
                         field.onChange(option?.value || "")
                       }
                       placeholder="Select or type your gender"
@@ -201,6 +229,11 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
                   );
                 }}
               />
+              {errors.gender && (
+                <p className="text-red-600 text-sm mt-2">
+                  {errors.gender.message}
+                </p>
+              )}
             </div>
 
             <Controller
@@ -216,8 +249,6 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
                     {...field}
                     options={countryOptions}
                     placeholder="Select your country"
-                    isSearchable
-                    classNamePrefix="react-select"
                     value={
                       countryOptions.find((o) => o.value === field.value) ||
                       null
@@ -235,6 +266,7 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
                         <span>{item.label}</span>
                       </div>
                     )}
+                    classNamePrefix="react-select"
                   />
 
                   {errors.country && (
@@ -270,8 +302,6 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
                             : "No cities found"
                           : "Select country first"
                       }
-                      isSearchable
-                      classNamePrefix="react-select"
                       value={selectedCityOption || null}
                       onChange={(selected) =>
                         field.onChange(selected?.value || "")
@@ -279,12 +309,7 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
                       isDisabled={
                         !selectedCountryCode || cityOptions.length === 0
                       }
-                      styles={{
-                        menu: (provided) => ({
-                          ...provided,
-                          zIndex: 9999,
-                        }),
-                      }}
+                      classNamePrefix="react-select"
                     />
 
                     {errors.city && (
@@ -305,23 +330,20 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
               <Controller
                 name="phone"
                 control={control}
-                render={({ field }) => {
-                  const phoneValue = field.value || undefined;
-                  return (
-                    <div className="border rounded-md p-2 h-10 flex items-center">
-                      <PhoneInput
-                        {...field}
-                        international
-                        defaultCountry={defaultCountryCode}
-                        value={phoneValue}
-                        onChange={field.onChange as PhoneInputProps["onChange"]}
-                        placeholder="Enter phone number"
-                        className="w-full h-full focus:outline-none !border-none !shadow-none"
-                        countrySelectProps={{ unicodeFlags: true }}
-                      />
-                    </div>
-                  );
-                }}
+                render={({ field }) => (
+                  <div className="border border-gray-300 rounded-md shadow-sm h-12 flex items-center transition duration-150 ease-in-out focus-within:border-[var(--color-primary)]">
+                    <PhoneInput
+                      {...field}
+                      international
+                      defaultCountry={defaultCountryCode}
+                      value={field.value || undefined}
+                      onChange={field.onChange as PhoneInputProps["onChange"]}
+                      placeholder="Enter phone number"
+                      className="!w-full !h-full !border-none !shadow-none react-phone-input-container"
+                      inputClassName="!w-full !h-full !border-none !shadow-none focus:ring-0"
+                    />
+                  </div>
+                )}
               />
 
               {errors.phone && (
@@ -331,14 +353,16 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
               )}
             </div>
 
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-dark-blue-2)] text-white py-3 rounded-md font-semibold text-lg transition-colors duration-200"
-            >
-              {isSubmitting ? "Processing..." : "Continue"}
-            </Button>
-          </form>
+            <motion.div whileTap={{ scale: 0.95 }}>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-dark-blue-2)] text-white py-3 rounded-md font-semibold text-lg transition"
+              >
+                {isSubmitting ? "Processing..." : "Continue"}
+              </Button>
+            </motion.div>
+          </motion.form>
 
           <div className="p-4 flex justify-center">
             <p className="font-semi-bold">Already have an account?</p>
@@ -350,9 +374,9 @@ const StepOneForm: React.FC<StepOneFormProps> = ({ onNext }) => {
             </span>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
-export default StepOneForm;
+export default StepOneComponent;

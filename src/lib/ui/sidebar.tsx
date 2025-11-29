@@ -1,22 +1,21 @@
-// components/ui/Sidebar.tsx
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 import {
-  Users,
+  Activity,
   Briefcase,
+  FileText,
+  LogOut,
   Plus,
   Search,
   Settings,
-  User,
-  FileText,
   TrendingUp,
-  Activity,
+  User,
+  Users,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { HineticLogo } from "./Logo";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import React from "react";
 
 interface SidebarProps {
   userType: "client" | "applicant";
@@ -31,6 +30,7 @@ interface NavItem {
 
 export const Sidebar: React.FC<SidebarProps> = ({ userType, onSwitchView }) => {
   const pathname = usePathname();
+  const router = useRouter();
 
   const clientNavItems: NavItem[] = [
     { name: "Dashboard", href: "/client/dashboard", icon: Briefcase },
@@ -52,12 +52,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ userType, onSwitchView }) => {
 
   const navItems = userType === "client" ? clientNavItems : applicantNavItems;
 
-  return (
-    <div className="w-64 bg-white border-r border-gray-200 h-screen flex flex-col">
-      <div className="p-6 border-b border-gray-200">
-        <HineticLogo />
-      </div>
+  const handleLogout = () => {
+    // TODO: Add your logout logic here (clear auth token, cookies, etc.)
+    // Then redirect to login page
+    router.push("/auth/login");
+  };
 
+  return (
+    <div className="w-64 bg-white border-r border-gray-200 h-screen flex flex-col justify-between">
       <nav className="flex-1 p-4">
         <div className="space-y-2">
           {navItems.map((item) => {
@@ -91,16 +93,24 @@ export const Sidebar: React.FC<SidebarProps> = ({ userType, onSwitchView }) => {
         </div>
       </nav>
 
-      {onSwitchView && (
-        <div className="p-4 border-t border-gray-200">
+      <div className="p-4 border-t border-gray-200 space-y-2">
+        {onSwitchView && (
           <button
             onClick={onSwitchView}
             className="w-full px-4 py-2 text-sm bg-gradient-to-r from-blue-500 to-cyan-400 text-white rounded-lg hover:from-blue-600 hover:to-cyan-500 transition-all"
           >
             Switch to {userType === "client" ? "Applicant" : "Client"} View
           </button>
-        </div>
-      )}
+        )}
+
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center justify-center space-x-2 px-4 py-2 text-sm bg-red-500 text-white rounded-lg hover:bg-red-600 transition-all"
+        >
+          <LogOut size={18} />
+          <span>Logout</span>
+        </button>
+      </div>
     </div>
   );
 };

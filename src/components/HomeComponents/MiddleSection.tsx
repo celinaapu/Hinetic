@@ -1,14 +1,15 @@
 "use client";
 
 import { JobCard } from "@/lib/shared/jobCard";
+import LazyVideo from "@/lib/shared/LazyVideo";
 import { ArrowRight, Building2, Star, TrendingUp, Users } from "lucide-react";
 import React from "react";
 
 const MiddleSections: React.FC = () => {
   return (
     <div>
-      <section className="pt-14 pb-20 px-8 lg:px-16 bg-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+      <section className="pt-14 pb-20 px-4 lg:px-16 bg-white">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-6 items-center">
           <div>
             <h3 className="text-gray-300">Who We Are</h3>
             <h1 className="text-4xl lg:text-5xl font-bold text-[var(--color-primary)] leading-tight mb-6">
@@ -51,20 +52,16 @@ const MiddleSections: React.FC = () => {
             </div>
           </div>
 
-          <div className="w-full h-full bg-[var(--color-main-bg)] rounded-3xl shadow-md flex items-center justify-center">
-            <video
-              className="w-full h-auto rounded-md"
-              autoPlay
-              loop
-              muted
-              playsInline
-            >
-              <source
-                src="https://res.cloudinary.com/celina/video/upload/v1755429195/1475515_People_Business_3840x2160_b4pnd7.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
+          <div className="relative w-full h-full rounded-3xl shadow-xl overflow-hidden">
+           <LazyVideo
+  src="https://res.cloudinary.com/celina/video/upload/v1755429195/1475515_People_Business_3840x2160_b4pnd7.mp4"
+  className="w-full h-full object-cover rounded-md"
+  autoPlay
+  loop
+  muted
+  playsInline
+/>
+
           </div>
         </div>
       </section>
@@ -73,23 +70,43 @@ const MiddleSections: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className=" grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <div className="w-full h-96 bg-[var(--color-accent)] rounded-3xl shadow-xl overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-purple)] opacity-90">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="grid grid-cols-2 gap-4 text-white text-center">
-                      {[
-                        { icon: <Building2 />, label: "Companies" },
-                        { icon: <Users />, label: "Professionals" },
-                        { icon: <TrendingUp />, label: "Growth" },
-                        { icon: <Star />, label: "Success" },
-                      ].map(({ icon, label }, idx) => (
-                        <div key={idx} className="bg-white/20 rounded-lg p-4">
-                          <div className="w-8 h-8 mx-auto mb-2">{icon}</div>
-                          <p className="text-sm">{label}</p>
-                        </div>
-                      ))}
+              <LazyVideo
+                src="https://res.cloudinary.com/celina/video/upload/v1763136283/1472692_People_Business_3840x2160_dccfow.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover rounded-3xl"
+                
+              ></LazyVideo>
+
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[var(--color-accent)]/70 to-[var(--color-purple)]/70 animate-gradient-move"></div>
+
+              <div className="relative w-full h-96 rounded-3xl shadow-xl overflow-hidden flex items-center justify-center p-6">
+                <div className="grid grid-cols-2 gap-4 text-white text-center max-w-xs">
+                  {[
+                    { icon: <Building2 />, label: "Companies" },
+                    { icon: <Users />, label: "Professionals" },
+                    { icon: <TrendingUp />, label: "Growth" },
+                    { icon: <Star />, label: "Success" },
+                  ].map(({ icon, label }, idx) => (
+                    <div
+                      key={idx}
+                      className="
+            rounded-xl p-4 
+            bg-white/20 backdrop-blur-md 
+            border border-white/10 
+            shadow-lg 
+            transition-all duration-300 
+            hover:scale-105 hover:-translate-y-1 hover:shadow-2xl 
+            animate-float 
+          "
+                      style={{ animationDelay: `${idx * 150}ms` }}
+                    >
+                      <div className="w-8 h-8 mx-auto mb-2">{icon}</div>
+                      <p className="text-sm font-medium">{label}</p>
                     </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>

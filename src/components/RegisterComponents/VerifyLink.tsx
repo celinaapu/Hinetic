@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// src/components/auth/register/VerificationComponent.tsx
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
+import LazyVideo from "@/lib/shared/LazyVideo";
 import { verificationSchema } from "@/Schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect, useRef, useState } from "react";
@@ -11,8 +12,10 @@ import { z } from "zod";
 
 type VerificationFormData = z.infer<typeof verificationSchema>;
 
-// Using any here is fine because we disabled the lint rule above
-const Button = ({ children, ...props }: any) => (
+const VerificationButton = ({
+  children,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
   <button {...props}>{children}</button>
 );
 
@@ -23,7 +26,7 @@ interface VerificationProps {
   onComplete: () => void;
 }
 
-const Verification: React.FC<VerificationProps> = ({
+const VerificationComponent: React.FC<VerificationProps> = ({
   onNext,
   onBack,
   email,
@@ -53,6 +56,7 @@ const Verification: React.FC<VerificationProps> = ({
 
   const onSubmit = async (data: VerificationFormData) => {
     setIsVerifying(true);
+
     try {
       await new Promise((resolve) => setTimeout(resolve, 1500));
       toast.success("Verification successful!");
@@ -67,9 +71,11 @@ const Verification: React.FC<VerificationProps> = ({
 
   const handleChange = (index: number, value: string) => {
     if (!/^\d?$/.test(value)) return;
+
     const currentCode = getValues("code").split("");
     currentCode[index] = value;
     setValue("code", currentCode.join(""), { shouldValidate: true });
+
     if (value && index < 5) inputsRef.current[index + 1]?.focus();
   };
 
@@ -92,11 +98,16 @@ const Verification: React.FC<VerificationProps> = ({
   return (
     <div className="min-h-screen flex md:flex-row">
       <div className="w-full bg-[var(--color-dark-blue-2)] md:w-1/2 flex justify-center items-center p-4 sm:p-6 lg:p-12">
-        <div className="w-full max-w-sm sm:max-w-md bg-white rounded-3xl shadow-xl p-6 sm:p-8 lg:p-10 text-center border border-gray-200 relative">
+        <div
+          className="
+            w-full max-w-sm sm:max-w-md bg-white rounded-3xl shadow-xl p-6 sm:p-8 lg:p-10 text-center border border-gray-200 relative
+            animate-[fadeInUp_0.6s_ease-out]
+          "
+        >
           <button
             type="button"
             onClick={onBack}
-            className="absolute top-4 left-4 p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors"
+            className="absolute top-4 left-4 p-2 rounded-full text-gray-500 hover:bg-gray-100 transition duration-200"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -117,23 +128,24 @@ const Verification: React.FC<VerificationProps> = ({
           <h1 className="text-3xl font-extrabold text-gray-900 mb-4 sm:mb-6">
             Verify Your Email
           </h1>
-          <p className="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8 leading-relaxed">
-            We've sent a 6-digit verification code to
+
+          <p className="text-sm sm:text-base text-gray-500 mb-6 sm:mb-8 animate-[fadeIn_1s_ease-out]">
+            We've sent a 6-digit verification code to{" "}
             <span className="font-semibold text-blue-600">
               {email || "your email"}
             </span>
-            . Please check your inbox and spam folder.
+            .
           </p>
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-6 sm:space-y-8"
+            className="space-y-6 sm:space-y-8 animate-[fadeInUp_0.8s_ease-out]"
           >
             <Controller
               name="code"
               control={control}
               render={({ field }) => (
-                <div className="flex justify-center gap-2 sm:gap-3">
+                <div className="flex justify-center gap-2 sm:gap-3 animate-fade-up transition-all duration-500">
                   {[0, 1, 2, 3, 4, 5].map((index) => (
                     <input
                       key={index}
@@ -143,11 +155,11 @@ const Verification: React.FC<VerificationProps> = ({
                       type="text"
                       maxLength={1}
                       inputMode="numeric"
-                      className={`w-12 h-12 sm:w-14 sm:h-14 text-2xl font-bold text-center rounded-xl transition-all duration-200
-      border-2 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50
-      bg-gray-50 text-gray-900 shadow-sm
-      ${errors.code ? "border-red-500 focus:ring-red-500/50" : ""}
-    `}
+                      className={`w-12 h-12 sm:w-14 sm:h-14 text-2xl font-bold text-center rounded-xl
+        border-2 border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/50
+        bg-gray-50 text-gray-900 shadow-sm transition-all duration-300
+        hover:scale-105 focus:scale-110
+        ${errors.code ? "border-red-500 focus:ring-red-500/50" : ""}`}
                       value={field.value[index] || ""}
                       onChange={(e) => handleChange(index, e.target.value)}
                       onKeyDown={(e) => handleKeyDown(e, index)}
@@ -159,31 +171,33 @@ const Verification: React.FC<VerificationProps> = ({
             />
 
             {errors.code && (
-              <p className="text-red-500 text-sm mt-2">{errors.code.message}</p>
+              <p className="text-red-500 text-sm animate-[fadeIn_0.3s_ease-out]">
+                {errors.code.message}
+              </p>
             )}
 
-            <div className="flex flex-col items-center justify-center space-y-2 text-sm text-gray-500">
+            <div className="flex flex-col items-center gap-2 text-sm text-gray-500">
               <span className="text-center">Didn't receive the code?</span>
               <button
                 type="button"
                 onClick={handleResend}
                 disabled={resendTimer > 0}
-                className={`font-medium transition-colors duration-200
+                className={`font-medium transition duration-200
                   ${
                     resendTimer > 0
                       ? "text-gray-400 cursor-not-allowed"
-                      : "text-blue-600 hover:text-blue-700 underline"
-                  }`}
+                      : "text-blue-600 hover:text-blue-700 underline animate-[pulse_1.2s_infinite]"
+                  }
+                `}
               >
                 {resendTimer > 0 ? `Resend in ${resendTimer}s` : "Resend code"}
               </button>
             </div>
 
-            <Button
+            <VerificationButton
               type="submit"
-              onClick={onNext}
               disabled={isVerifying}
-              className={`w-full py-3 rounded-xl font-semibold transition-all duration-200
+              className={`w-full py-3 rounded-xl font-semibold transition-all duration-300
                 ${
                   isVerifying
                     ? "bg-blue-300 cursor-not-allowed"
@@ -198,28 +212,24 @@ const Verification: React.FC<VerificationProps> = ({
               ) : (
                 "Verify & Continue"
               )}
-            </Button>
+            </VerificationButton>
           </form>
         </div>
       </div>
 
-      <div className="hidden md:block w-1/2 relative overflow-hidden">
-        <video
+      <div className="hidden md:block w-1/2 relative overflow-hidden animate-[fadeIn_1.2s_ease-out]">
+        <LazyVideo
+          src="https://res.cloudinary.com/celina/video/upload/v1755283576/0_Security_Shield_3840x2160_ntrdrf.mp4"
+          className="w-full h-full object-cover"
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-cover"
-        >
-          <source
-            src="https://res.cloudinary.com/celina/video/upload/v1755283576/0_Security_Shield_3840x2160_ntrdrf.mp4"
-            type="video/mp4"
-          />
-        </video>
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent" />
       </div>
     </div>
   );
 };
 
-export default Verification;
+export default VerificationComponent;

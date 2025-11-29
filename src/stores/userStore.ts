@@ -9,7 +9,6 @@ export interface User {
   avatar?: string;
 }
 
-// ✅ Define store shape
 interface UserStore {
   user: User | null;
   setUser: (user: User) => void;
@@ -17,7 +16,6 @@ interface UserStore {
   isAuthenticated: boolean;
 }
 
-// ✅ Zustand store with persistence
 export const useUserStore = create<UserStore>()(
   persist(
     (set) => ({
@@ -28,7 +26,7 @@ export const useUserStore = create<UserStore>()(
       clearUser: () => set({ user: null, isAuthenticated: false }),
     }),
     {
-      name: "user-storage", // key in localStorage
+      name: "user-storage", 
     }
   )
 );

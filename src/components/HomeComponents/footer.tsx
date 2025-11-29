@@ -1,8 +1,6 @@
 import React from "react";
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { FiGithub } from "react-icons/fi";
-import { FaInstagram } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
-import { FaTwitter } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
@@ -69,7 +67,7 @@ const Footer: React.FC = () => {
               <h3 className="text-white font-semibold mb-4">Contact</h3>
               <div className="space-y-2 text-sm text-gray-300">
                 <p>+234 7080084120</p>
-                <p>justinacassy@gmail.com</p>
+                <p>apucelina13@gmail.com</p>
               </div>
             </div>
           </div>

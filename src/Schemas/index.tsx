@@ -6,7 +6,14 @@ export const loginSchema = z.object({
 });
 export const roleSchema = z.object({
   role: z.enum(
-    ["client", "artisan", "explorer", "skilled-professional", "marketplace"],
+    [
+      "Client",
+      "Artisan",
+      "Explorer",
+      "Skilled-professional",
+      "marketplace",
+      "Carreer Guideance",
+    ],
     { message: "Please choose a role" }
   ),
 });
